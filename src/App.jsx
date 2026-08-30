@@ -59,7 +59,7 @@ function App() {
 
           <p className="mt-4 max-w-2xl text-lg text-slate-300">
             Para momento inolvidables deleitate con los sabores tradicionales de Catamarca. <br />
-            <span className="font-semibold text-brand">:)</span>.
+            <span className="font-semibold text-brand">Delicias de Catamarca</span>.
           </p>
         </header>
 
