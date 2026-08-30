@@ -58,8 +58,8 @@ function App() {
           </h1>
 
           <p className="mt-4 max-w-2xl text-lg text-slate-300">
-            Encuentra los productos más destacados y nuevos usando el sistema de tokens de
-            <span className="font-semibold text-brand">@theme</span>.
+            Para momento inolvidables deleitate con los sabores tradicionales de Catamarca. <br />
+            <span className="font-semibold text-brand">:)</span>.
           </p>
         </header>
 
