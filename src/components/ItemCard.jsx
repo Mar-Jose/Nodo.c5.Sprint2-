@@ -68,7 +68,7 @@ function ItemCard({ item, estaEnMiLista, toggleMiLista }) {
       </div>
 
       <div className="mt-4">
-        <p className="text-xs uppercase tracking-[0.2em] text-muted">Fecha de receta</p>
+        <p className="text-xs uppercase tracking-[0.2em] text-muted">Año de la receta</p>
         <p className="mt-1 text-sm font-medium text-slate-200">{item.fechaReceta}</p>
       </div>
 
