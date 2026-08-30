@@ -1,120 +1,99 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useMemo, useState } from 'react'
+import dulcesCatamarca from './data/item'
+import SearchBar from './components/SearchBar'
+import ItemList from './components/ItemList'
+import Navbar from './components/Navbar'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todas')
+  const [busqueda, setBusqueda] = useState('')
+  const [miLista, setMiLista] = useState([])
+
+  const toggleMiLista = (itemId) => {
+    setMiLista((listaActual) => {
+      const yaExiste = listaActual.includes(itemId)
+
+      if (yaExiste) {
+        return listaActual.filter((id) => id !== itemId)
+      }
+
+      return [...listaActual, itemId]
+    })
+  }
+
+  const categorias = useMemo(
+    () => ['Todas', ...new Set(dulcesCatamarca.map((item) => item.categoria))],
+    []
+  )
+
+  const itemsFiltrados = useMemo(() => {
+    let items =
+      categoriaSeleccionada === 'Todas'
+        ? dulcesCatamarca
+        : dulcesCatamarca.filter((item) => item.categoria === categoriaSeleccionada)
+
+    const termino = busqueda.trim().toLowerCase()
+
+    if (!termino) return items
+
+    return items.filter((item) => {
+      const texto = `${item.nombre} ${item.origen} ${item.categoria}`.toLowerCase()
+      return texto.includes(termino)
+    })
+  }, [categoriaSeleccionada, busqueda])
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+      <Navbar lista={miLista} items={dulcesCatamarca} onToggleItem={toggleMiLista} />
+
+      <main className="min-h-screen bg-bg text-text font-sans">
+      <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+        <header className="mb-10">
+          <span className="inline-flex items-center rounded-full border border-brand/30 bg-brand/10 px-3 py-1 text-sm font-medium text-brand">
+            Dulces regionales de Catamarca
+          </span>
+
+          <h1 className="mt-6 font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+            Sabores tradicionales
+          </h1>
+
+          <p className="mt-4 max-w-2xl text-lg text-slate-300">
+            Encuentra los productos más destacados y nuevos usando el sistema de tokens de
+            <span className="font-semibold text-brand">@theme</span>.
           </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+        </header>
 
-      <div className="ticks"></div>
+        <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div className="mb-8 flex flex-wrap gap-3 lg:mb-0">
+            {categorias.map((categoria) => {
+              const activa = categoria === categoriaSeleccionada
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
+              return (
+                <button
+                  key={categoria}
+                  type="button"
+                  onClick={() => setCategoriaSeleccionada(categoria)}
+                  className={[
+                    'rounded-full border px-4 py-2 text-sm font-medium transition-colors',
+                    activa
+                      ? 'border-brand bg-brand text-white'
+                      : 'border-white/10 bg-surface text-slate-300 hover:border-brand/50 hover:text-white'
+                  ].join(' ')}
                 >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+                  {categoria}
+                </button>
+              )
+            })}
+          </div>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+          <div className="flex items-center gap-3">
+            <SearchBar value={busqueda} onChange={setBusqueda} />
+          </div>
+        </div>
+
+        <ItemList items={itemsFiltrados} miLista={miLista} toggleMiLista={toggleMiLista} />
+      </div>
+    </main>
     </>
   )
 }

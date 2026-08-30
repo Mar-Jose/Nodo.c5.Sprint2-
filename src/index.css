@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;700;800&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --color-bg: #020617;
+  --color-surface: #0f172a;
+  --color-surface-soft: #111827;
+  --color-card: #1e293b;
+  --color-brand: #8b5cf6;
+  --color-brand-strong: #7c3aed;
+  --color-muted: #94a3b8;
+  --color-text: #e2e8f0;
+
+  --font-sans: 'Inter', 'Segoe UI', sans-serif;
+  --font-display: 'Manrope', 'Segoe UI', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply m-0 bg-bg text-text font-sans antialiased;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
