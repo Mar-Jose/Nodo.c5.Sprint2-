@@ -5,17 +5,17 @@ function ItemCard({ item, estaEnMiLista, toggleMiLista }) {
 
   if (isInMyList) {
     toggleButton = (
-      <div className="flex items-center gap-2">
+      <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
         <button
           type="button"
-          className="rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-emerald-200 transition hover:bg-emerald-500/20"
+          className="w-full rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-emerald-200 transition hover:bg-emerald-500/20 sm:w-auto"
         >
           {isInMyList ? '✓ En mi lista' : '+ Agregar'}
         </button>
         <button
           type="button"
           onClick={() => toggleMiLista(item.id)}
-          className="rounded-full border border-rose-400/40 bg-rose-500/10 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-rose-200 transition hover:bg-rose-500/20"
+          className="w-full rounded-full border border-rose-400/40 bg-rose-500/10 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-rose-200 transition hover:bg-rose-500/20 sm:w-auto"
         >
           Quitar
         </button>
@@ -26,7 +26,7 @@ function ItemCard({ item, estaEnMiLista, toggleMiLista }) {
       <button
         type="button"
         onClick={() => toggleMiLista(item.id)}
-        className="rounded-full border border-brand/30 bg-brand/10 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-brand transition hover:bg-brand hover:text-white"
+        className="w-full rounded-full border border-brand/30 bg-brand/10 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-brand transition hover:bg-brand hover:text-white sm:w-auto"
       >
         + Agregar
       </button>
@@ -34,7 +34,7 @@ function ItemCard({ item, estaEnMiLista, toggleMiLista }) {
   }
 
   return (
-    <article className="rounded-2xl border border-white/10 bg-surface p-5 shadow-lg shadow-brand/5 transition-transform duration-200 hover:-translate-y-1">
+    <article className="rounded-2xl border border-white/10 bg-surface p-4 shadow-lg shadow-brand/5 transition-transform duration-200 hover:-translate-y-1 sm:p-5">
       <div className="mb-4 flex flex-wrap gap-2">
         {item.destacado && (
           <span className="rounded-full bg-brand px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
@@ -72,7 +72,7 @@ function ItemCard({ item, estaEnMiLista, toggleMiLista }) {
         <p className="mt-1 text-sm font-medium text-slate-200">{item.fechaReceta}</p>
       </div>
 
-      <div className="mt-5 flex items-center justify-between gap-3 border-t border-white/10 pt-4">
+      <div className="mt-5 flex flex-col gap-3 border-t border-white/10 pt-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-muted">Precio</p>
           <p className="mt-1 text-2xl font-bold text-brand">
@@ -80,7 +80,7 @@ function ItemCard({ item, estaEnMiLista, toggleMiLista }) {
           </p>
         </div>
 
-        {toggleButton}
+        <div className="w-full sm:w-auto">{toggleButton}</div>
       </div>
     </article>
   )

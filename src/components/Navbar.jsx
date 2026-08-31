@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 
-function Navbar({ lista = [], items = [], onToggleItem }) {
+function Navbar({ lista = [], items = [], onToggleItem, onVaciarLista }) {
   const [abierto, setAbierto] = useState(false)
 
   const hayItems = lista.length > 0
@@ -12,11 +12,11 @@ function Navbar({ lista = [], items = [], onToggleItem }) {
   return (
     <>
       <nav className="border-b border-white/10 bg-surface/80 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-3">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4">
+          <div className="flex min-w-0 items-center gap-2 sm:gap-3">
             <svg
               viewBox="0 0 64 64"
-              className="h-10 w-10 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+              className="h-8 w-8 shrink-0 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] sm:h-10 sm:w-10"
               aria-label="Logo de alfajor blanco"
               role="img"
             >
@@ -35,17 +35,17 @@ function Navbar({ lista = [], items = [], onToggleItem }) {
               />
             </svg>
 
-            <div className="text-lg font-semibold text-white">Dulces Catamarca</div>
+            <div className="truncate text-sm font-semibold text-white sm:text-lg">Dulces Catamarca</div>
           </div>
 
           <button
             type="button"
             onClick={() => setAbierto((actual) => !actual)}
-            className="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-3 py-1.5 text-sm font-medium text-brand transition hover:bg-brand hover:text-white"
+            className="inline-flex items-center gap-1.5 rounded-full border border-brand/30 bg-brand/10 px-2.5 py-1.5 text-xs font-medium text-brand transition hover:bg-brand hover:text-white sm:gap-2 sm:px-3 sm:text-sm"
           >
             <span>Mi lista</span>
             {hayItems && (
-              <span className="rounded-full bg-brand px-2 py-0.5 text-xs text-white">{lista.length}</span>
+              <span className="rounded-full bg-brand px-1.5 py-0.5 text-[10px] text-white sm:px-2 sm:text-xs">{lista.length}</span>
             )}
           </button>
         </div>
@@ -75,27 +75,39 @@ function Navbar({ lista = [], items = [], onToggleItem }) {
                 <p className="mt-2 text-sm text-slate-400">Guardá tus favoritos desde la grilla principal.</p>
               </div>
             ) : (
-              <ul className="space-y-3">
-                {itemsSeleccionados.map((item) => (
-                  <li
-                    key={item.id}
-                    className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-3"
+              <>
+                <div className="mb-4 flex justify-end">
+                  <button
+                    type="button"
+                    onClick={onVaciarLista}
+                    className="rounded-full border border-rose-400/40 bg-rose-500/10 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-rose-200 transition hover:bg-rose-500/20"
                   >
-                    <div>
-                      <p className="font-medium text-white">{item.nombre}</p>
-                      <p className="text-sm text-slate-400">{item.origen}</p>
-                    </div>
+                    Vaciar mi lista
+                  </button>
+                </div>
 
-                    <button
-                      type="button"
-                      onClick={() => onToggleItem(item.id)}
-                      className="rounded-full border border-rose-400/40 bg-rose-500/10 px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-rose-200 transition hover:bg-rose-500/20"
+                <ul className="space-y-3">
+                  {itemsSeleccionados.map((item) => (
+                    <li
+                      key={item.id}
+                      className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-3"
                     >
-                      Quitar
-                    </button>
-                  </li>
-                ))}
-              </ul>
+                      <div>
+                        <p className="font-medium text-white">{item.nombre}</p>
+                        <p className="text-sm text-slate-400">{item.origen}</p>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => onToggleItem(item.id)}
+                        className="rounded-full border border-rose-400/40 bg-rose-500/10 px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-rose-200 transition hover:bg-rose-500/20"
+                      >
+                        Quitar
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </>
             )}
           </div>
         </div>

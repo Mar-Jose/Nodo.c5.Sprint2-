@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import dulcesCatamarca from './data/item'
 import SearchBar from './components/SearchBar'
 import ItemList from './components/ItemList'
@@ -7,7 +7,31 @@ import Navbar from './components/Navbar'
 function App() {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todas')
   const [busqueda, setBusqueda] = useState('')
-  const [miLista, setMiLista] = useState([])
+  const [miLista, setMiLista] = useState(() => {
+    const guardado = localStorage.getItem('dulces')
+
+    if (!guardado) return []
+
+    try {
+      return JSON.parse(guardado)
+    } catch {
+      return []
+    }
+  })
+
+  useEffect(() => {
+    if (miLista.length === 0) {
+      localStorage.removeItem('dulces')
+      return
+    }
+
+    localStorage.setItem('dulces', JSON.stringify(miLista))
+  }, [miLista])
+
+  useEffect(() => {
+    const appName = 'Dulces Catamarca'
+    document.title = miLista.length > 0 ? `Mi lista (${miLista.length}) | ${appName}` : appName
+  }, [miLista])
 
   const toggleMiLista = (itemId) => {
     setMiLista((listaActual) => {
@@ -19,6 +43,15 @@ function App() {
 
       return [...listaActual, itemId]
     })
+  }
+
+  const vaciarMiLista = () => {
+    const confirmado = window.confirm('¿Seguro que querés vaciar tu lista?')
+
+    if (!confirmado) return
+
+    setMiLista([])
+    localStorage.removeItem('dulces')
   }
 
   const categorias = useMemo(
@@ -44,27 +77,27 @@ function App() {
 
   return (
     <>
-      <Navbar lista={miLista} items={dulcesCatamarca} onToggleItem={toggleMiLista} />
+      <Navbar lista={miLista} items={dulcesCatamarca} onToggleItem={toggleMiLista} onVaciarLista={vaciarMiLista} />
 
       <main className="min-h-screen bg-bg text-text font-sans">
-      <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
-        <header className="mb-10">
-          <span className="inline-flex items-center rounded-full border border-brand/30 bg-brand/10 px-3 py-1 text-sm font-medium text-brand">
+      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16 lg:py-20">
+        <header className="mb-8 sm:mb-10">
+          <span className="inline-flex items-center rounded-full border border-brand/30 bg-brand/10 px-3 py-1 text-xs font-medium text-brand sm:text-sm">
             Dulces regionales de Catamarca
           </span>
 
-          <h1 className="mt-6 font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+          <h1 className="mt-5 font-display text-[2.1rem] font-extrabold tracking-tight text-white sm:mt-6 sm:text-5xl">
             Sabores tradicionales
           </h1>
 
-          <p className="mt-4 max-w-2xl text-lg text-slate-300">
-            Para momento inolvidables deleitate con los sabores tradicionales de Catamarca. <br />
-            <span className="font-semibold text-brand">Delicias de Catamarca</span>.
+          <p className="mt-4 max-w-2xl text-base text-slate-300 sm:text-lg">
+            Para momentos inolvidables, deleitate con los sabores tradicionales de Catamarca.
+            <span className="mt-1 block font-semibold text-brand">Delicias de Catamarca</span>
           </p>
         </header>
 
         <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <div className="mb-8 flex flex-wrap gap-3 lg:mb-0">
+          <div className="flex flex-wrap gap-2 sm:gap-3 lg:mb-0">
             {categorias.map((categoria) => {
               const activa = categoria === categoriaSeleccionada
 
