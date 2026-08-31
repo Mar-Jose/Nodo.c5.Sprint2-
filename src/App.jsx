@@ -3,55 +3,24 @@ import dulcesCatamarca from './data/item'
 import SearchBar from './components/SearchBar'
 import ItemList from './components/ItemList'
 import Navbar from './components/Navbar'
+import useMyList from './hooks/useMyList'
 
 function App() {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todas')
   const [busqueda, setBusqueda] = useState('')
-  const [miLista, setMiLista] = useState(() => {
-    const guardado = localStorage.getItem('dulces')
-
-    if (!guardado) return []
-
-    try {
-      return JSON.parse(guardado)
-    } catch {
-      return []
-    }
-  })
-
-  useEffect(() => {
-    if (miLista.length === 0) {
-      localStorage.removeItem('dulces')
-      return
-    }
-
-    localStorage.setItem('dulces', JSON.stringify(miLista))
-  }, [miLista])
+  const { list: miLista, total, toggle: toggleMiLista, clear: clearMiLista } = useMyList()
 
   useEffect(() => {
     const appName = 'Dulces Catamarca'
-    document.title = miLista.length > 0 ? `Mi lista (${miLista.length}) | ${appName}` : appName
-  }, [miLista])
-
-  const toggleMiLista = (itemId) => {
-    setMiLista((listaActual) => {
-      const yaExiste = listaActual.includes(itemId)
-
-      if (yaExiste) {
-        return listaActual.filter((id) => id !== itemId)
-      }
-
-      return [...listaActual, itemId]
-    })
-  }
+    document.title = total > 0 ? `Mi lista (${total}) | ${appName}` : appName
+  }, [total])
 
   const vaciarMiLista = () => {
     const confirmado = window.confirm('¿Seguro que querés vaciar tu lista?')
 
     if (!confirmado) return
 
-    setMiLista([])
-    localStorage.removeItem('dulces')
+    clearMiLista()
   }
 
   const categorias = useMemo(
