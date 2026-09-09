@@ -17,3 +17,4 @@ export default function useFilteredItems(items, categoriaSeleccionada, busqueda)
     })
   }, [items, categoriaSeleccionada, busqueda])
 }
+// función de utilidad. No hook. Correción del profe Lucas!!!!

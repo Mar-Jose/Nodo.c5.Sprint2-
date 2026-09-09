@@ -57,7 +57,6 @@ function ItemCard({ item, estaEnMiLista, toggleMiLista }) {
           </span>
         )}
       </div>
-
       <p className="text-xs uppercase tracking-[0.2em] text-muted">{item.categoria}</p>
 
       <h2 className="mt-3 font-display text-2xl font-bold text-white">{item.nombre}</h2>

@@ -7,3 +7,5 @@ function useDocumentTitle(total, appName = 'Dulces Catamarca') {
 }
 
 export default useDocumentTitle
+
+// función de utilidad. No hook. Correción del profe Lucas.
