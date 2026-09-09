@@ -2,7 +2,7 @@ function ItemCard({ item, estaEnMiLista, toggleMiLista }) {
   const isInMyList = estaEnMiLista
 
   let toggleButton
-
+  //booleano:
   if (isInMyList) {
     toggleButton = (
       <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
@@ -32,7 +32,7 @@ function ItemCard({ item, estaEnMiLista, toggleMiLista }) {
       </button>
     )
   }
-
+          //badge: destacado, nuevo, requiere refrigeración, en mi lista.
   return (
     <article className="rounded-2xl border border-white/10 bg-surface p-4 shadow-lg shadow-brand/5 transition-transform duration-200 hover:-translate-y-1 sm:p-5">
       <div className="mb-4 flex flex-wrap gap-2">

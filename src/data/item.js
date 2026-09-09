@@ -1,8 +1,8 @@
-﻿// src/data/items.js - Catálogo de Dulces Regionales de Catamarca
+﻿// Catálogo de Dulces Regionales de Catamarca
 export const dulcesCatamarca = [
   {
     id: 1,
-    nombre: "Nueces Confitadas",
+    nombre: "Nueces Confitadas🥚",
     categoria: "Confitería",
     origen: "Belén",
     precio: 4500,
@@ -12,7 +12,7 @@ export const dulcesCatamarca = [
   },
   {
     id: 2,
-    nombre: "Turrón de Nuez",
+    nombre: "Turrón de Nuez🧈",
     categoria: "Turrón",
     origen: "Andalgalá",
     precio: 5200,
@@ -52,7 +52,7 @@ export const dulcesCatamarca = [
   },
   {
     id: 6,
-    nombre: "Rosquete Catamarqueño",
+    nombre: "Rosquete Catamarqueño🥯",
     categoria: "Panificación Dulce",
     origen: "Capital",
     precio: 1800,
@@ -62,7 +62,7 @@ export const dulcesCatamarca = [
   },
   {
     id: 7,
-    nombre: "Empanadilla de Dulce de Cayote",
+    nombre: "Empanadilla de Dulce de Cayote🥟",
     categoria: "Panificación Dulce",
     origen: "Santa María",
     precio: 1200,
@@ -72,7 +72,7 @@ export const dulcesCatamarca = [
   },
   {
     id: 8,
-    nombre: "Dulce de Membrillo Rubio",
+    nombre: "Dulce de Membrillo Rubio🍞",
     categoria: "Dulce en Pan",
     origen: "Andalgalá",
     precio: 2500,
@@ -92,7 +92,7 @@ export const dulcesCatamarca = [
   },
   {
     id: 10,
-    nombre: "Tableta de Algarroba y Nuez",
+    nombre: "Tableta de Algarroba y Nuez🍫",
     categoria: "Confitería",
     origen: "Recreo",
     precio: 4100,
@@ -112,7 +112,7 @@ export const dulcesCatamarca = [
   },
   {
     id: 12,
-    nombre: "Alfeñique de Arroba",
+    nombre: "Alfeñique de Algarroba🍬",
     categoria: "Confitería",
     origen: "Tinogasta",
     precio: 3200,
@@ -122,7 +122,7 @@ export const dulcesCatamarca = [
   },
   {
     id: 13,
-    nombre: "Dulce de Leche de Cabra",
+    nombre: "Dulce de Leche de Cabra🍯",
     categoria: "Dulce Untable",
     origen: "Valle Viejo",
     precio: 3600,
@@ -152,7 +152,7 @@ export const dulcesCatamarca = [
   },
   {
     id: 16,
-    nombre: "Bollitos de Algarroba",
+    nombre: "Bollitos de Algarroba🍪",
     categoria: "Panificación Dulce",
     origen: "El Alto",
     precio: 2200,
@@ -162,7 +162,7 @@ export const dulcesCatamarca = [
   },
   {
     id: 17,
-    nombre: "Dulce de Higo con Nuez",
+    nombre: "Dulce de Higo con Nuez🍯",
     categoria: "Dulce en Almíbar",
     origen: "Paclín",
     precio: 3900,
@@ -172,7 +172,7 @@ export const dulcesCatamarca = [
   },
   {
     id: 18,
-    nombre: "Arrope de Uva",
+    nombre: "Arrope de Uva🍯",
     categoria: "Arrope",
     origen: "Tinogasta",
     precio: 3000,
@@ -192,7 +192,7 @@ export const dulcesCatamarca = [
   },
   {
     id: 20,
-    nombre: "Turrón de Arroba y Miel",
+    nombre: "Turrón de Algarroba y Miel🥖",
     categoria: "Turrón",
     origen: "Santa María",
     precio: 5500,
@@ -200,10 +200,9 @@ export const dulcesCatamarca = [
     fechaReceta: 1930,
     requiereRefrigeracion: false
   },
-  // --- NUEVOS QUE ME PEDISTE ---
   {
     id: 21,
-    nombre: "Dulce de Membrillo",
+    nombre: "Dulce de Membrillo🧇",
     categoria: "Dulce en Pan",
     origen: "Londres",
     precio: 2600,
@@ -213,7 +212,7 @@ export const dulcesCatamarca = [
   },
   {
     id: 22,
-    nombre: "Jalea de Higo",
+    nombre: "Jalea de Higo🍯",
     categoria: "Dulce Untable",
     origen: "Ambato",
     precio: 3300,
@@ -233,7 +232,7 @@ export const dulcesCatamarca = [
   },
   {
     id: 24,
-    nombre: "Dulce de Leche Tradicional",
+    nombre: "Dulce de Leche Tradicional🍯",
     categoria: "Dulce Untable",
     origen: "Valle Viejo",
     precio: 2800,
